@@ -11,6 +11,15 @@
     <exec.mainClass>com.ivatolm.sem6.App</exec.mainClass>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.11.0-M2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -25,6 +34,39 @@
 	    </manifest>
 	  </archive>
 	</configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.8.12</version>
+	<executions>
+	  <execution>
+	    <id>default-prepare-agent</id>
+	    <goals>
+	      <goal>prepare-agent</goal>
+	    </goals>
+	  </execution>
+	  <execution>
+	    <id>jacoco-check</id>
+	    <goals>
+	      <goal>check</goal>
+	    </goals>
+	    <configuration>
+	      <rules>
+	        <rule>
+		  <element>PACKAGE</element>
+		  <limits>
+		    <limit>
+		      <counter>LINE</counter>
+		      <value>COVEREDRATIO</value>
+		      <minimum>0.80</minimum>
+		    </limit>
+		  </limits>
+		</rule>
+	      </rules>
+	    </configuration>
+	  </execution>
+	</executions>
       </plugin>
     </plugins>
   </build>
