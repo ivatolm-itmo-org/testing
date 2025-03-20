@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.ivatolm.sem6;
 
 /**
  * Hello world!
