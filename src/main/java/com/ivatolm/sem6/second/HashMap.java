@@ -1,4 +1,4 @@
-package com.ivatolm.sem6;
+package com.ivatolm.sem6.second;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.lang.NullPointerException;
 /**
  * Implementation of a HashMap with closed addressing.
  */
-class HashMap<K, V> {
+public class HashMap<K, V> {
 	class HashEntry {
 		public K key;
 		public V value;

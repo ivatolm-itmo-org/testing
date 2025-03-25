@@ -1,4 +1,4 @@
-package com.ivatolm.sem6;
+package com.ivatolm.sem6.second;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
