@@ -1,32 +1,19 @@
 package com.ivatolm.sem6.third;
 
 import java.util.Optional;
+import java.util.Random;
 
-public class Human {
+public abstract class Human {
 
 	private final Integer id;
 	private final String name;
 
-	private Optional<Transport> transport;
+	private Vector3 position;
 
-	public Human(Integer id, String name) {
+	public Human(Integer id, String name, Vector3 position) {
 		this.id = id;
 		this.name = name;
-		this.transport = Optional.empty();
-	}
-
-	public void mount(Transport transport) {
-		this.transport = Optional.of(transport);
-	}
-
-	public void unmount() {
-		this.transport = Optional.empty();
-	}
-
-	public void update() {
-		if (this.transport.isPresent()) {
-			System.out.println("Riding...");
-		}
+		this.position = position;
 	}
 
 }
