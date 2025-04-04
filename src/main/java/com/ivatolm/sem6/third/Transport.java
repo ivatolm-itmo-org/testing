@@ -5,16 +5,18 @@ public abstract class Transport implements Ridable {
 	private Integer id;
 	private TransportType type;
 
-	private Vector3 position;
-	private Vector3 velocity;
+	protected Vector3 position;
+	protected Vector3 velocity;
+	protected Vector3 acceleration;
 
-	private Vector3 target;
+	protected Vector3 target;
 
-	public Transport(Integer id, TransportType type, Vector3 position, Vector3 velocity) {
+	public Transport(Integer id, TransportType type, Vector3 position) {
 		this.id = id;
 		this.type = type;
 		this.position = position;
-		this.velocity = velocity;
+		this.velocity = new Vector3(0, 0, 0);
+		this.acceleration = new Vector3(0, 0, 0);
 	}
 
 	@Override

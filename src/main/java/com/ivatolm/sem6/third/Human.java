@@ -8,7 +8,7 @@ public abstract class Human {
 	private final Integer id;
 	private final String name;
 
-	private Vector3 position;
+	protected Vector3 position;
 
 	public Human(Integer id, String name, Vector3 position) {
 		this.id = id;

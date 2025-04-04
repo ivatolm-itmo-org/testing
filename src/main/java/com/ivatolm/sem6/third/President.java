@@ -1,24 +1,29 @@
 package com.ivatolm.sem6.third;
 
 import java.util.Optional;
+import java.util.List;
 
 class President extends Human implements DrivingAbility {
 
     private static President instance = null;
     private Optional<Transport> transport;
+    private List<River> path;
+    private Integer pathPointer;
 
-    private President(Integer id, Vector3 position) {
+    private President(Integer id, Vector3 position, List<River> path) {
         super(id, "Biblbroks", position);
+
+        this.path = path;
+        this.pathPointer = 0;
     }
 
-    // NOTE: Java loves overloading stuff, much better that default values, i agree
     public President getInstance() {
-        return getInstance(null, null);
+        return getInstance(null, null, null);
     }
 
-    public President getInstance(Integer id, Vector3 position) {
+    public President getInstance(Integer id, Vector3 position, List<River> path) {
         if (instance != null) return instance;
-        instance = new President(id, position);
+        instance = new President(id, position, path);
         return instance;
     }
 
@@ -34,7 +39,27 @@ class President extends Human implements DrivingAbility {
 
     @Override
     public void ride() {
-        // TODO: ...
+        final double EPSILON = 0.05;
+
+        if (this.pathPointer >= this.path.size()) {
+            return;
+        }
+
+        final River river = this.path.get(this.pathPointer);
+        final Vector3 target = new Vector3(
+                river.getPosition().getX() + river.getWidth(),
+                river.getPosition().getY(),
+                river.getPosition().getZ());
+
+        this.transport.get().setDestination(target);
+        final Vector3 difference = this.transport.get().ride();
+        if (!(difference.getX() <= EPSILON && difference.getY() <= EPSILON && difference.getZ() <= EPSILON)) {
+            return;
+        }
+
+        if (this.pathPointer < this.path.size() - 1) {
+            pathPointer++;
+        }
     }
 
 }
