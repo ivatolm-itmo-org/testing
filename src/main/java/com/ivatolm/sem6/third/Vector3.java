@@ -58,4 +58,8 @@ public class Vector3 {
         return this.x + ", " + this.y + ", " + this.z;
     }
 
+    public boolean equals(Vector3 other) {
+        return this.x == other.getX() && this.y == other.getY() && this.z == other.getZ();
+    }
+
 }
