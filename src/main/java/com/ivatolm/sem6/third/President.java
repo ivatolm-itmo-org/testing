@@ -15,20 +15,20 @@ public class President extends Human implements DrivingAbility {
     private List<River> path;
     private Integer pathPointer;
 
-    private President(Integer id, Vector3 position, List<River> path) {
-        super(id, "Biblbroks", position);
+    private President(Vector3 position, List<River> path) {
+        super("Biblbroks", position);
 
         this.path = path;
         this.pathPointer = 0;
     }
 
     static public President getInstance() {
-        return getInstance(null, null, null);
+        return getInstance(null, null);
     }
 
-    static public President getInstance(Integer id, Vector3 position, List<River> path) {
+    static public President getInstance(Vector3 position, List<River> path) {
         if (instance != null) return instance;
-        instance = new President(id, position, path);
+        instance = new President(position, path);
         return instance;
     }
 

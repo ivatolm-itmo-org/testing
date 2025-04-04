@@ -20,7 +20,7 @@ public class App {
 		};
 		List<River> riverList = Arrays.asList(rivers);
 
-		President president = President.getInstance(4, new Vector3(0, 0, 0), riverList);
+		President president = President.getInstance(new Vector3(0, 0, 0), riverList);
 		Boat boat = new Boat("Titanic", new Vector3(0, 5, 0), 42);
 		president.mount(boat);
 
