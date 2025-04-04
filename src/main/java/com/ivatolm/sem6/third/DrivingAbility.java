@@ -6,6 +6,6 @@ public interface DrivingAbility {
 
     void unmount();
 
-    void ride();
+    Vector3 ride();
 
 }

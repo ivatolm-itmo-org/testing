@@ -16,4 +16,8 @@ public abstract class Human {
 		this.position = position;
 	}
 
+	public Vector3 getPosition() {
+		return this.position;
+	}
+
 }

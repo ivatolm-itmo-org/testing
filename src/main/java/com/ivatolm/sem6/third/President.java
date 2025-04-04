@@ -3,7 +3,7 @@ package com.ivatolm.sem6.third;
 import java.util.Optional;
 import java.util.List;
 
-class President extends Human implements DrivingAbility {
+public class President extends Human implements DrivingAbility {
 
     private static President instance = null;
     private Optional<Transport> transport;
@@ -17,11 +17,11 @@ class President extends Human implements DrivingAbility {
         this.pathPointer = 0;
     }
 
-    public President getInstance() {
+    static public President getInstance() {
         return getInstance(null, null, null);
     }
 
-    public President getInstance(Integer id, Vector3 position, List<River> path) {
+    static public President getInstance(Integer id, Vector3 position, List<River> path) {
         if (instance != null) return instance;
         instance = new President(id, position, path);
         return instance;
@@ -30,6 +30,7 @@ class President extends Human implements DrivingAbility {
     @Override
     public void mount(Transport transport) {
         this.transport = Optional.of(transport);
+        this.transport.get().setPosition(this.position);
     }
 
     @Override
@@ -38,12 +39,14 @@ class President extends Human implements DrivingAbility {
     }
 
     @Override
-    public void ride() {
-        final double EPSILON = 0.05;
+    public Vector3 ride() {
+        final double EPSILON = 5.0;
 
         if (this.pathPointer >= this.path.size()) {
-            return;
+            this.transport.get().stop();
+            return new Vector3(0, 0, 0);
         }
+        this.transport.get().start();
 
         final River river = this.path.get(this.pathPointer);
         final Vector3 target = new Vector3(
@@ -53,13 +56,16 @@ class President extends Human implements DrivingAbility {
 
         this.transport.get().setDestination(target);
         final Vector3 difference = this.transport.get().ride();
+        this.position = this.transport.get().getPosition();
         if (!(difference.getX() <= EPSILON && difference.getY() <= EPSILON && difference.getZ() <= EPSILON)) {
-            return;
+            return difference;
         }
 
         if (this.pathPointer < this.path.size() - 1) {
-            pathPointer++;
+            this.pathPointer++;
         }
+
+        return difference;
     }
 
 }

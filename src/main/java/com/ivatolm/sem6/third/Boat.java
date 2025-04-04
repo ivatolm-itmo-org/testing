@@ -1,6 +1,6 @@
 package com.ivatolm.sem6.third;
 
-class Boat extends Transport {
+public class Boat extends Transport {
 
     private double motorPower;
     private boolean motorStarted;
@@ -24,20 +24,19 @@ class Boat extends Transport {
 
     @Override
     public Vector3 ride() {
-        final double DELTA_TIME = 0.1;
+        final double DELTA_TIME = 1.0;
         final double MAX_AXIS_VELOCITY = 1.0;
 
         if (!this.motorStarted) {
             return new Vector3(0, 0, 0);
         }
 
-        final Vector3 lastPosition = this.position;
-
         final Vector3 direction = new Vector3(
             this.position.getX() - this.target.getX(),
             this.position.getY() - this.target.getY(),
             this.position.getZ() - this.target.getZ());
         direction.normalize();
+        direction.invert();
 
         this.acceleration.setX(this.motorPower * direction.getX());
         this.acceleration.setY(this.motorPower * direction.getY());
@@ -56,9 +55,9 @@ class Boat extends Transport {
         this.position.setZ(this.position.getZ() + this.velocity.getZ() * DELTA_TIME);
 
         final Vector3 difference = new Vector3(
-            lastPosition.getX() - this.position.getX(),
-            lastPosition.getY() - this.position.getY(),
-            lastPosition.getZ() - this.position.getZ());
+            Math.abs(this.position.getX() - this.target.getX()),
+            Math.abs(this.position.getY() - this.target.getY()),
+            Math.abs(this.position.getZ() - this.target.getZ()));
 
         return difference;
     }

@@ -36,6 +36,10 @@ public abstract class Transport implements Ridable {
 		return this.position;
 	}
 
+	public void setPosition(Vector3 position) {
+		this.position = position;
+	}
+
 	public Vector3 getVelocity() {
 		return this.position;
 	}
