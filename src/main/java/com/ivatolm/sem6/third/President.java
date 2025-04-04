@@ -36,11 +36,13 @@ public class President extends Human implements DrivingAbility {
     public void mount(Transport transport) {
         this.transport = Optional.of(transport);
         this.transport.get().setPosition(this.position);
+        this.transport.get().start();
     }
 
     @Override
     public void unmount() {
         this.transport = Optional.empty();
+        this.transport.get().stop();
     }
 
     @Override
@@ -48,10 +50,8 @@ public class President extends Human implements DrivingAbility {
         final double EPSILON = 5.0;
 
         if (this.pathPointer >= this.path.size()) {
-            this.transport.get().stop();
             return new Vector3(0, 0, 0);
         }
-        this.transport.get().start();
 
         final River river = this.path.get(this.pathPointer);
         final Vector3 target = new Vector3(

@@ -10,21 +10,27 @@ public class Boat extends Transport {
     private double motorPower;
     private boolean motorStarted;
 
-    public Boat(Integer id, Vector3 position, double motorPower) {
-        super(id, TransportType.TRANSPORT_TYPE_BOAT, position);
+    private Integer notificationCounter;
+
+    public Boat(String name, Vector3 position, double motorPower) {
+        super(name, TransportType.TRANSPORT_TYPE_BOAT, position);
 
         this.motorPower = motorPower;
         this.motorStarted = false;
+
+        this.notificationCounter = 0;
     }
 
     @Override
     public void start() {
         this.motorStarted = true;
+        System.out.println("Vrrr-chk... VROOOM!");
     }
 
     @Override
     public void stop() {
         this.motorStarted = false;
+        System.out.println("VROOOM... putt-putt... clunk");
     }
 
     @Override
@@ -63,6 +69,12 @@ public class Boat extends Transport {
             Math.abs(this.position.getX() - this.destination.getX()),
             Math.abs(this.position.getY() - this.destination.getY()),
             Math.abs(this.position.getZ() - this.destination.getZ()));
+
+        if (notificationCounter % 10 == 0) {
+            System.out.println("Target distance " + Math.round(difference.length()) + " meters.");
+            this.notificationCounter = 1;
+        }
+        this.notificationCounter++;
 
         return difference;
     }

@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class River {
 
-	private Integer id;
+	private String name;
 	private Vector3 position;
 	private double width;
 
-	public River(Integer id, Vector3 position, double width) {
-		this.id = id;
+	public River(String name, Vector3 position, double width) {
+		this.name = name;
 		this.position = position;
 		this.width = width;
 	}

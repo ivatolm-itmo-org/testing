@@ -17,9 +17,13 @@ public class Vector3 {
         this.z = z;
     }
 
-    public void normalize() {
-        final double length = Math.sqrt(
+    public double length() {
+        return Math.sqrt(
             Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
+    }
+
+    public void normalize() {
+        final double length = this.length();
         if (length == 0) {
             return;
         }

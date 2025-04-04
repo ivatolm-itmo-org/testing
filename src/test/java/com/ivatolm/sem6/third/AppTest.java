@@ -10,7 +10,7 @@ class AppTest {
     // Unit tests
     @Test
     void testBoatRideNotStarted() {
-        Boat boat = new Boat(1, new Vector3(0, 0, 0), 1);
+        Boat boat = new Boat("Titanic", new Vector3(0, 0, 0), 1);
         boat.setDestination(new Vector3(10, 10, 10));
         Vector3 difference = boat.ride();
 
@@ -19,7 +19,7 @@ class AppTest {
 
     @Test
     void testBoatRideStarted() {
-        Boat boat = new Boat(1, new Vector3(0, 0, 0), 1);
+        Boat boat = new Boat("Titanic", new Vector3(0, 0, 0), 1);
         boat.setDestination(new Vector3(10, 10, 10));
         boat.start();
         Vector3 difference = boat.ride();
@@ -31,7 +31,7 @@ class AppTest {
     @Test
     void testPresidentBoatInteraction() {
         President president = President.getInstance(4, new Vector3(0, 0, 0), new ArrayList<>());
-		Boat boat = new Boat(5, new Vector3(0, 5, 0), 42);
+		Boat boat = new Boat("Titanic", new Vector3(0, 5, 0), 42);
 		president.mount(boat);
         Vector3 difference = president.ride();
 

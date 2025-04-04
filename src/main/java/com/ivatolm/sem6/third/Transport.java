@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public abstract class Transport implements Ridable {
 
-	private Integer id;
+	private String name;
 	private TransportType type;
 
 	protected Vector3 position;
@@ -16,8 +16,8 @@ public abstract class Transport implements Ridable {
 
 	protected Vector3 destination;
 
-	public Transport(Integer id, TransportType type, Vector3 position) {
-		this.id = id;
+	public Transport(String name, TransportType type, Vector3 position) {
+		this.name = name;
 		this.type = type;
 		this.position = position;
 		this.velocity = new Vector3(0, 0, 0);
