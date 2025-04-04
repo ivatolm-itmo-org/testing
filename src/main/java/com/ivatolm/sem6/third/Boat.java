@@ -1,5 +1,10 @@
 package com.ivatolm.sem6.third;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Boat extends Transport {
 
     private double motorPower;
@@ -32,9 +37,9 @@ public class Boat extends Transport {
         }
 
         final Vector3 direction = new Vector3(
-            this.position.getX() - this.target.getX(),
-            this.position.getY() - this.target.getY(),
-            this.position.getZ() - this.target.getZ());
+            this.position.getX() - this.destination.getX(),
+            this.position.getY() - this.destination.getY(),
+            this.position.getZ() - this.destination.getZ());
         direction.normalize();
         direction.invert();
 
@@ -55,9 +60,9 @@ public class Boat extends Transport {
         this.position.setZ(this.position.getZ() + this.velocity.getZ() * DELTA_TIME);
 
         final Vector3 difference = new Vector3(
-            Math.abs(this.position.getX() - this.target.getX()),
-            Math.abs(this.position.getY() - this.target.getY()),
-            Math.abs(this.position.getZ() - this.target.getZ()));
+            Math.abs(this.position.getX() - this.destination.getX()),
+            Math.abs(this.position.getY() - this.destination.getY()),
+            Math.abs(this.position.getZ() - this.destination.getZ()));
 
         return difference;
     }

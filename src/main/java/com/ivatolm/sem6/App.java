@@ -25,12 +25,9 @@ public class App {
 		president.mount(boat);
 
 		while (true) {
-			Vector3 difference = president.ride();
+			president.ride();
 			Vector3 position = president.getPosition();
-			System.out.println("position: " +
-				position.getX() + ", " +
-				position.getY() + ", " +
-				position.getZ());
+			System.out.println("position: " + position);
 
 			try {
 				Thread.sleep(100);

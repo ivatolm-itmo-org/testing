@@ -2,6 +2,8 @@ package com.ivatolm.sem6.first;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.Math;
@@ -29,5 +31,11 @@ class FirstTest {
 	@Test
 	public void whenPositive() {
 		assertTrue((first.run(Math.PI) - (1)) < EPS);
+	}
+
+	@ParameterizedTest
+	@ValueSource(doubles = { 1., 2., 3. })
+	public void whenSomenums(Double num) {
+		assertTrue((first.run(num) - (Math.sin(num))) < EPS);
 	}
 }

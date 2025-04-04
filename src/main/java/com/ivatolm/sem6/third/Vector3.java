@@ -1,5 +1,10 @@
 package com.ivatolm.sem6.third;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Vector3 {
 
     private double x;
@@ -29,37 +34,17 @@ public class Vector3 {
         this.z = -this.z;
     }
 
-    public double getX() {
-        return this.x;
-    }
-
-    public double getY() {
-        return this.y;
-    }
-
-    public double getZ() {
-        return this.z;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public void setZ(double z) {
-        this.z = z;
-    }
-
     @Override
     public String toString() {
         return this.x + ", " + this.y + ", " + this.z;
     }
 
-    public boolean equals(Vector3 other) {
-        return this.x == other.getX() && this.y == other.getY() && this.z == other.getZ();
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || other.getClass() != this.getClass()) return false;
+        Vector3 otherVec = (Vector3) other;
+        return this.x == otherVec.getX() && this.y == otherVec.getY() && this.z == otherVec.getZ();
     }
 
 }

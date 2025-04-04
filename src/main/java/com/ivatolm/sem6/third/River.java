@@ -1,5 +1,10 @@
 package com.ivatolm.sem6.third;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class River {
 
 	private Integer id;
@@ -10,14 +15,6 @@ public class River {
 		this.id = id;
 		this.position = position;
 		this.width = width;
-	}
-
-	public Vector3 getPosition() {
-		return this.position;
-	}
-
-	public double getWidth() {
-		return this.width;
 	}
 
 }

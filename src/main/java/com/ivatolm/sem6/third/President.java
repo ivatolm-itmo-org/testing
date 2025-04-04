@@ -3,6 +3,11 @@ package com.ivatolm.sem6.third;
 import java.util.Optional;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class President extends Human implements DrivingAbility {
 
     private static President instance = null;

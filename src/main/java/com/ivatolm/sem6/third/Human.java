@@ -1,8 +1,10 @@
 package com.ivatolm.sem6.third;
 
-import java.util.Optional;
-import java.util.Random;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class Human {
 
 	private final Integer id;
@@ -14,10 +16,6 @@ public abstract class Human {
 		this.id = id;
 		this.name = name;
 		this.position = position;
-	}
-
-	public Vector3 getPosition() {
-		return this.position;
 	}
 
 }
