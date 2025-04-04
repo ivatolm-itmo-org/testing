@@ -12,35 +12,52 @@ public class President extends Human implements DrivingAbility {
 
     private static President instance = null;
     private Optional<Transport> transport;
-    private List<River> path;
-    private Integer pathPointer;
 
-    private President(Vector3 position, List<River> path) {
+    private Optional<List<River>> path;
+    private Optional<Integer> pathPointer;
+
+    private Integer lastPathPointer;
+
+    private President(Vector3 position) {
         super("Biblbroks", position);
 
-        this.path = path;
-        this.pathPointer = 0;
+        this.path = Optional.empty();
+        this.pathPointer = Optional.empty();
+
+        this.lastPathPointer = -1;
     }
 
     static public President getInstance() {
-        return getInstance(null, null);
+        return getInstance(null);
     }
 
-    static public President getInstance(Vector3 position, List<River> path) {
+    static public President getInstance(Vector3 position) {
         if (instance != null) return instance;
-        instance = new President(position, path);
+        instance = new President(position);
         return instance;
+    }
+
+    public void setPath(List<River> path) {
+        if (path.isEmpty()) {
+            this.path = Optional.empty();
+            this.pathPointer = Optional.empty();
+        }
+        this.path = Optional.of(path);
+        this.pathPointer = Optional.of(0);
+        System.out.println("New path... " + path.size() + " rivers ahead...");
     }
 
     @Override
     public void mount(Transport transport) {
         this.transport = Optional.of(transport);
         this.transport.get().setPosition(this.position);
+        System.out.println(this.getName() + " hops onto " + transport.getName());
         this.transport.get().start();
     }
 
     @Override
     public void unmount() {
+        System.out.println(this.getName() + " gets off " + this.transport.get().getName());
         this.transport = Optional.empty();
         this.transport.get().stop();
     }
@@ -49,15 +66,24 @@ public class President extends Human implements DrivingAbility {
     public Vector3 ride() {
         final double EPSILON = 5.0;
 
-        if (this.pathPointer >= this.path.size()) {
+        if (this.pathPointer.isEmpty()) {
             return new Vector3(0, 0, 0);
         }
 
-        final River river = this.path.get(this.pathPointer);
+        final List<River> path = this.path.get();
+        final Integer pathPointer = this.pathPointer.get();
+
+
+        final River river = path.get(pathPointer);
         final Vector3 target = new Vector3(
-                river.getPosition().getX() + river.getWidth(),
-                river.getPosition().getY(),
-                river.getPosition().getZ());
+            river.getPosition().getX() + river.getWidth(),
+            river.getPosition().getY(),
+            river.getPosition().getZ());
+
+        if (lastPathPointer < pathPointer) {
+            System.out.println("Now crossing " + river.getName() + " it's about " + Math.round(river.getWidth()) + " meters wide");
+            lastPathPointer = pathPointer;
+        }
 
         this.transport.get().setDestination(target);
         final Vector3 difference = this.transport.get().ride();
@@ -66,8 +92,8 @@ public class President extends Human implements DrivingAbility {
             return difference;
         }
 
-        if (this.pathPointer < this.path.size() - 1) {
-            this.pathPointer++;
+        if (pathPointer < path.size() - 1) {
+            this.pathPointer = Optional.of(pathPointer + 1);
         }
 
         return difference;
