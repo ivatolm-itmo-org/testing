@@ -41,6 +41,7 @@ public class President extends Human implements DrivingAbility {
         if (path.isEmpty()) {
             this.path = Optional.empty();
             this.pathPointer = Optional.empty();
+            return;
         }
         this.path = Optional.of(path);
         this.pathPointer = Optional.of(0);
@@ -58,8 +59,8 @@ public class President extends Human implements DrivingAbility {
     @Override
     public void unmount() {
         System.out.println(this.getName() + " gets off " + this.transport.get().getName());
-        this.transport = Optional.empty();
         this.transport.get().stop();
+        this.transport = Optional.empty();
     }
 
     @Override
