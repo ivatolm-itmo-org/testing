@@ -27,13 +27,19 @@ public class App {
 		president.mount(boat);
 
 		while (true) {
-			president.ride();
+			Vector3 difference = president.ride();
+			if (difference.equals(new Vector3(0, 0, 0))) {
+				break;
+			}
+
 			try {
 				Thread.sleep(100);
 			} catch (java.lang.InterruptedException exception) {
 				// ignore
 			}
 		}
+
+		president.die();
 	}
 
 }
