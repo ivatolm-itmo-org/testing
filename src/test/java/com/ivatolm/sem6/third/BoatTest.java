@@ -1,10 +1,15 @@
 package com.ivatolm.sem6.third;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.ivatolm.sem6.ThreadLeakExtension;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 
+@ExtendWith(ThreadLeakExtension.class)
 public class BoatTest {
 
     private Boat boat;

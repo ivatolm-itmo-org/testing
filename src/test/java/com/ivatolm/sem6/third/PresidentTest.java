@@ -8,7 +8,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import com.ivatolm.sem6.ThreadLeakExtension;
+
+@ExtendWith(ThreadLeakExtension.class)
 public class PresidentTest {
 
     private President president;
