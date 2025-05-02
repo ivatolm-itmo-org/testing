@@ -2,11 +2,13 @@ package com.ivatolm.sem6;
 
 import com.ivatolm.sem6.functions.CosCalculator;
 import com.ivatolm.sem6.functions.CotCalculator;
+import com.ivatolm.sem6.functions.CscCalculator;
 import com.ivatolm.sem6.functions.SecCalculator;
 import com.ivatolm.sem6.functions.SinCalculator;
 import com.ivatolm.sem6.functions.TanCalculator;
 import com.ivatolm.sem6.stubs.CosCalculatorStub;
 import com.ivatolm.sem6.stubs.CotCalculatorStub;
+import com.ivatolm.sem6.stubs.CscCalculatorStub;
 import com.ivatolm.sem6.stubs.SecCalculatorStub;
 import com.ivatolm.sem6.stubs.SinCalculatorStub;
 import com.ivatolm.sem6.stubs.TanCalculatorStub;
@@ -35,5 +37,10 @@ public class ModuleFactory {
     public static Calculator createSec(Mode mode) {
         CosCalculator cosCalc = new CosCalculator(new SinCalculator());
         return (mode == Mode.REAL) ? new SecCalculator(cosCalc) : new SecCalculatorStub();
+    }
+
+    public static Calculator createCsc(Mode mode) {
+        SinCalculator sinCalc = new SinCalculator();
+        return (mode == Mode.REAL) ? new CscCalculator(sinCalc) : new CscCalculatorStub();
     }
 }
