@@ -1,12 +1,25 @@
 package com.ivatolm.sem6;
 
+import com.ivatolm.sem6.functions.CosCalculator;
 import com.ivatolm.sem6.functions.SinCalculator;
+import com.ivatolm.sem6.functions.TanCalculator;
+import com.ivatolm.sem6.stubs.CosCalculatorStub;
 import com.ivatolm.sem6.stubs.SinCalculatorStub;
+import com.ivatolm.sem6.stubs.TanCalculatorStub;
 
 public class ModuleFactory {
     public enum Mode { REAL, STUB }
 
     public static Calculator createSin(Mode mode) {
         return (mode == Mode.REAL) ? new SinCalculator() : new SinCalculatorStub();
+    }
+
+    public static Calculator createCos(Mode mode) {
+        return (mode == Mode.REAL) ? new CosCalculator(new SinCalculator()) : new CosCalculatorStub();
+    }
+
+    public static Calculator createTan(Mode mode) {
+        SinCalculator sinCalc = new SinCalculator();
+        return (mode == Mode.REAL) ? new TanCalculator(sinCalc, new CosCalculator(sinCalc)) : new TanCalculatorStub();
     }
 }
