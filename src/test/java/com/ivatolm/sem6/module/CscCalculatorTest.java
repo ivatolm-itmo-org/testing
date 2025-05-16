@@ -21,10 +21,14 @@ public class CscCalculatorTest {
         calculator = new CscCalculator(new SinCalculator());
     }
 
+    double csc(double x) {
+        return 1 / Math.sin(x);
+    }
+
     @ParameterizedTest
     @ValueSource(doubles = {Math.PI / 2, Math.PI / 6, 5 * Math.PI / 6})
     public void testBoundaryValues(double x) {
-        double expected = 1 / Math.sin(x);
+        double expected = csc(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
     }
 
@@ -37,15 +41,8 @@ public class CscCalculatorTest {
     @ParameterizedTest
     @ValueSource(doubles = {-Math.PI / 6, -Math.PI / 2})
     public void testNegativeAngles(double x) {
-        double expected = 1 / Math.sin(x);
+        double expected = csc(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
-    }
-
-    @Test
-    public void testHighPrecision() {
-        double x = Math.PI / 4;
-        double expected = Math.sqrt(2);
-        assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 
     @ParameterizedTest
@@ -55,7 +52,14 @@ public class CscCalculatorTest {
         3 * Math.PI / 2 + 6 * Math.PI
     })
     public void testPeriodicity(double x) {
-        double expected = 1 / Math.sin(x);
+        double expected = csc(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
+    }
+
+    @Test
+    public void testSmallEpsilon() {
+        double x = Math.PI / 4;
+        double expected = csc(x);
+        assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 }

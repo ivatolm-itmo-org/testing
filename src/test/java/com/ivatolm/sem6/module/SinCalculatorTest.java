@@ -88,7 +88,7 @@ public class SinCalculatorTest {
     @Test
     public void testSmallEpsilon() {
         double x = Math.PI / 3;
-        double expected = Math.sqrt(3) / 2;
+        double expected = Math.sin(x);
         assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 }

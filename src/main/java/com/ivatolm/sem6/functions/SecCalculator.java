@@ -11,6 +11,7 @@ public class SecCalculator implements Calculator {
 
     @Override
     public double calc(double x, double epsilon) {
+        x = Utils.normalizeAngle(x);
         double cosValue = cosCalculator.calc(x, epsilon);
         if (Math.abs(cosValue) < epsilon) {
             throw new ArithmeticException("Division by zero: cos(x) is too close to 0 when x = " + x);

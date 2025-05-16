@@ -24,10 +24,14 @@ public class SecCalculatorTest {
         calculator = new SecCalculator(cosCalculator);
     }
 
+    double sec(double x) {
+        return 1 / Math.cos(x);
+    }
+
     @ParameterizedTest
     @ValueSource(doubles = {0.0, Math.PI / 3, Math.PI / 4})
     public void testBoundaryValues(double x) {
-        double expected = 1 / Math.cos(x);
+        double expected = sec(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
     }
 
@@ -40,7 +44,7 @@ public class SecCalculatorTest {
     @ParameterizedTest
     @ValueSource(doubles = {-Math.PI / 3, -Math.PI / 4})
     public void testNegativeAngles(double x) {
-        double expected = 1 / Math.cos(x);
+        double expected = sec(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
     }
 
@@ -51,9 +55,9 @@ public class SecCalculatorTest {
     }
 
     @Test
-    public void testHighPrecision() {
+    public void testSmallEpsilon() {
         double x = Math.PI / 6;
-        double expected = 2 / Math.sqrt(3);
+        double expected = sec(x);
         assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 }

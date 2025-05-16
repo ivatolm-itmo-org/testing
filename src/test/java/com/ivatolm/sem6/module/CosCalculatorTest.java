@@ -89,7 +89,7 @@ public class CosCalculatorTest {
     @Test
     public void testSmallEpsilon() {
         double x = Math.PI / 4;
-        double expected = Math.sqrt(2) / 2;
+        double expected = Math.cos(x);
         assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 }

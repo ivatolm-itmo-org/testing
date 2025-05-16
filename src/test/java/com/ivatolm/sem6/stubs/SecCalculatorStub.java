@@ -10,7 +10,8 @@ public class SecCalculatorStub implements Calculator {
         Math.PI, -1.0,
         Math.PI / 3, 2.0,
         Math.PI / 4, Math.sqrt(2),
-        2 * Math.PI / 3, -2.0
+        2 * Math.PI / 3, -2.0,
+        Math.PI / 6, 2/ Math.sqrt(3)
     );
 
     @Override

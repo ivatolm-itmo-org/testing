@@ -13,6 +13,8 @@ public class TanCalculator implements Calculator {
 
     @Override
     public double calc(double x, double epsilon) {
+        x = Utils.normalizeAngle(x);
+
         double sinValue = sinCalculator.calc(x, epsilon);
         double cosValue = cosCalculator.calc(x, epsilon);
 

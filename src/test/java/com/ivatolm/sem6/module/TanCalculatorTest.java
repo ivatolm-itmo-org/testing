@@ -89,7 +89,7 @@ public class TanCalculatorTest {
     @Test
     public void testSmallEpsilon() {
         double x = Math.PI / 6;
-        double expected = 1 / Math.sqrt(3);
+        double expected = Math.tan(x);
         assertEquals(expected, calculator.calc(x, 1e-10), 1e-10);
     }
 }

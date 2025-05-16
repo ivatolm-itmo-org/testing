@@ -17,7 +17,8 @@ public class CotCalculatorStub implements Calculator {
     public double calc(double x, double epsilon) {
         if (!STUB_VALUES.containsKey(x)) {
             System.out.println("WARNING: No stub value for x=" + x + " in cot calc");
+            throw new RuntimeException("No stub available");
         }
-        return STUB_VALUES.getOrDefault(x, 0.0);
+        return STUB_VALUES.get(x);
     }
 }

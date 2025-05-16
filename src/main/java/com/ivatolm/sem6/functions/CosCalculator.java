@@ -11,6 +11,7 @@ public class CosCalculator implements Calculator {
 
     @Override
     public double calc(double x, double epsilon) {
+        x = Utils.normalizeAngle(x);
         double convertation = x + Math.PI / 2;
         return sinCalculator.calc(convertation, epsilon);
     }

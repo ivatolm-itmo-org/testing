@@ -9,6 +9,7 @@ public class CosCalculatorStub implements Calculator {
         0.0, 1.0,
         Math.PI / 3, 0.5,
         Math.PI / 2, 0.0,
+        Math.PI / 6, Math.sqrt(3)/2,
         Math.PI, -1.0,
         2 * Math.PI / 3, -0.5,
         3 * Math.PI / 2, 0.0,
@@ -19,7 +20,8 @@ public class CosCalculatorStub implements Calculator {
     public double calc(double x, double epsilon) {
         if (!STUB_VALUES.containsKey(x)) {
             System.out.println("WARNING: There is no stub value for x=" + x + " in cos calc");
+            throw new RuntimeException("No stub available");
         }
-        return STUB_VALUES.getOrDefault(x, 0.0);
+        return STUB_VALUES.get(x);
     }
 }

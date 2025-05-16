@@ -5,6 +5,7 @@ import com.ivatolm.sem6.Calculator;
 public class SinCalculator implements Calculator {
   @Override
   public double calc(double x, double epsilon) {
+    x = Utils.normalizeAngle(x);
     double result = 0;
     double term = x;
     int n = 1;

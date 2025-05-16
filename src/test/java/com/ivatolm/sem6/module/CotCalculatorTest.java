@@ -24,10 +24,14 @@ public class CotCalculatorTest {
         calculator = new CotCalculator(sinCalculator, cosCalculator);
     }
 
+    double cot(double x) {
+        return 1 / Math.tan(x);
+    }
+
     @ParameterizedTest
     @ValueSource(doubles = {Math.PI / 4, Math.PI / 3, Math.PI / 6})
     public void testBoundaryValues(double x) {
-        double expected = 1 / Math.tan(x);
+        double expected = cot(x);
         assertEquals(expected, calculator.calc(x, EPSILON), EPSILON);
     }
 
@@ -40,6 +44,6 @@ public class CotCalculatorTest {
     @Test
     public void testSmallEpsilon() {
         double x = Math.PI / 6;
-        assertEquals(Math.sqrt(3), calculator.calc(x, 1e-10), 1e-10);
+        assertEquals(cot(x), calculator.calc(x, 1e-10), 1e-10);
     }
 }
