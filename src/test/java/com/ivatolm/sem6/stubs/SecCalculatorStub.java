@@ -2,9 +2,11 @@ package com.ivatolm.sem6.stubs;
 
 import java.util.Map;
 
-import com.ivatolm.sem6.Calculator;
+import com.ivatolm.sem6.functions.CosCalculator;
+import com.ivatolm.sem6.functions.SecCalculator;
+import com.ivatolm.sem6.functions.Utils;
 
-public class SecCalculatorStub implements Calculator {
+public class SecCalculatorStub extends SecCalculator {
     private static final Map<Double, Double> STUB_VALUES = Map.of(
         0.0, 1.0,
         Math.PI, -1.0,
@@ -14,8 +16,13 @@ public class SecCalculatorStub implements Calculator {
         Math.PI / 6, 2/ Math.sqrt(3)
     );
 
+    public SecCalculatorStub(CosCalculator cosCalculator) {
+        super(cosCalculator);
+    }
+
     @Override
     public double calc(double x, double epsilon) {
+        x = Utils.normalizeAngle(x);
         if (!STUB_VALUES.containsKey(x)) {
             System.out.println("WARNING: No stub value for x=" + x + " in sec calc");
         }
