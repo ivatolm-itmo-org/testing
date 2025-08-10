@@ -2,3 +2,4 @@ target
 .mvn
 *.swp
 .DS_Store
+.idea
