@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public User createUser(String name, String email) {
-        User user = new User(null, name, email);
+        User user = new User(name, email);
         return repo.save(user);
     }
 

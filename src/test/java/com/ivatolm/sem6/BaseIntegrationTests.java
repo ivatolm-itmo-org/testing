@@ -1,18 +1,28 @@
 package com.ivatolm.sem6;
 
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
+
+import javax.sql.DataSource;
 
 @SpringBootTest
-@Testcontainers
 public abstract class BaseIntegrationTests {
 
-    @Container
-    protected static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+    protected static final PostgreSQLContainer<?> postgres =
+            new PostgreSQLContainer<>("postgres:16-alpine")
+                    .withReuse(true);
+
+    static {
+        postgres.start();
+    }
+
+    @Autowired
+    protected DataSource dataSource;
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
@@ -20,9 +30,17 @@ public abstract class BaseIntegrationTests {
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.datasource.driver-class-name", () -> "org.postgresql.Driver");
+    }
 
-        registry.add("spring.flyway.locations", () -> "classpath:db/migration");
-        registry.add("spring.flyway.baseline-on-migrate", () -> "true");
+    @BeforeEach
+    void setup() {
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource)
+                .cleanDisabled(false)
+                .target("2")
+                .load();
+        flyway.clean();
+        flyway.migrate();
     }
 
 }

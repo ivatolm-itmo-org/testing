@@ -1,14 +1,10 @@
 package com.ivatolm.sem6;
 
 import com.ivatolm.sem6.models.User;
-import com.ivatolm.sem6.models.repositories.UserRepository;
 import com.ivatolm.sem6.services.UserService;
-import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.sql.DataSource;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,50 +15,35 @@ public class UserIntegrationTests extends BaseIntegrationTests {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @BeforeEach
-    void setup() {
-        Flyway flyway = Flyway.configure()
-                .dataSource(dataSource)
-                .target("2")
-                .load();
-        flyway.migrate();
-    }
-
     @Test
     void testCreateUser() {
-        User created = userService.createUser("Bob", "bob@test.com");
+        User created = userService.createUser("Bob Ross", "bobross@example.com");
 
-        Optional<User> found = userRepository.findById(created.getId());
+        Optional<User> found = userService.getUserById(created.getId());
         assertTrue(found.isPresent());
-        assertEquals("Bob", found.get().getName());
-        assertEquals("bob@test.com", found.get().getEmail());
+        assertEquals("Bob Ross", found.get().getName());
+        assertEquals("bobross@example.com", found.get().getEmail());
     }
 
     @Test
     void testUpdateUser() {
-        User user = userService.createUser("Bob", "bob@test.com");
+        User user = userService.createUser("Bob Ross", "bobross@example.com");
 
-        user.setEmail("new.alice@test.com");
+        user.setEmail("aliceross@example.com");
         userService.updateUser(user);
 
-        Optional<User> updated = userRepository.findById(user.getId());
+        Optional<User> updated = userService.getUserById(user.getId());
         assertTrue(updated.isPresent());
-        assertEquals("new.alice@test.com", updated.get().getEmail());
+        assertEquals("aliceross@example.com", updated.get().getEmail());
     }
 
     @Test
     void testDeleteUser() {
-        User user = userService.createUser("Bob", "bob@test.com");
+        User user = userService.createUser("Bob Ross", "bobross@example.com");
 
         userService.deleteUser(user.getId());
 
-        Optional<User> deleted = userRepository.findById(user.getId());
+        Optional<User> deleted = userService.getUserById(user.getId());
         assertTrue(deleted.isEmpty());
     }
 

@@ -4,8 +4,6 @@
 //import org.flywaydb.core.api.MigrationVersion;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.jdbc.core.JdbcTemplate;
 //import javax.sql.DataSource;
 //import java.sql.Connection;
 //import java.sql.DatabaseMetaData;
@@ -15,14 +13,12 @@
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //
-//@SpringBootTest(properties = { "spring.flyway.enabled=false" })
-//public class MigrationCompatibilityTest extends BaseIntegrationTest {
+//public class MigrationCompatibilityTest extends BaseIntegrationTests {
 //
 //    @Autowired
 //    private DataSource dataSource;
 //
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
+//
 //
 //    @Test
 //    void testRollbackCompatibility() throws Exception {
