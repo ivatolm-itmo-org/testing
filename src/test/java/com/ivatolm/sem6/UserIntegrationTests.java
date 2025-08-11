@@ -4,15 +4,17 @@ import com.ivatolm.sem6.models.User;
 import com.ivatolm.sem6.models.repositories.UserRepository;
 import com.ivatolm.sem6.services.UserService;
 import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.sql.DataSource;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserIntegrationTest extends BaseIntegrationTest {
+public class UserIntegrationTests extends BaseIntegrationTests {
 
     @Autowired
     private UserService userService;
@@ -21,7 +23,16 @@ public class UserIntegrationTest extends BaseIntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
-    private Flyway flyway;
+    private DataSource dataSource;
+
+    @BeforeEach
+    void setup() {
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource)
+                .target("2")
+                .load();
+        flyway.migrate();
+    }
 
     @Test
     void testCreateUser() {
