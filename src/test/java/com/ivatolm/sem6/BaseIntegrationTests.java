@@ -37,7 +37,6 @@ public abstract class BaseIntegrationTests {
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
                 .cleanDisabled(false)
-                .target("2")
                 .load();
         flyway.clean();
         flyway.migrate();
